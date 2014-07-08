@@ -1,4 +1,4 @@
-(ns echelom.core)
+(ns plomb.core)
 
 
 
@@ -45,14 +45,14 @@
           ~'om.core/IWillMount
            (~'will-mount  ~(first (rest will-mount))
            (~'om/set-state! ~owner :__handlers ~catch-events)
-           (~'echelom.core/-register-broadcasts ~catch-events)
+           (~'plomb.core/-register-broadcasts ~catch-events)
            ~@(rest (rest will-mount)))))
 
       ~@(when
           did-mount `(
           ~'om.core/IDidMount
            (~'did-mount   ~(first (rest did-mount ))
-            (~'echelom.core/-event-setup ~app ~owner)
+            (~'plomb.core/-event-setup ~app ~owner)
          ~@(rest  (rest did-mount )))))
 
       ~@(when
@@ -77,7 +77,7 @@
          will-unmount `(
         ~'om.core/IWillUnmount
          (~'will-unmount   ~(first (rest will-unmount ))
-         (~'echelom.core/-unmount-events ~app ~owner)
+         (~'plomb.core/-unmount-events ~app ~owner)
          ~@(rest  (rest will-unmount )))))
 
        ~@(when

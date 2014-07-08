@@ -2,11 +2,11 @@
   (:require
       [om.core :as om :include-macros true]
       [om.dom :as dom :include-macros true]
-      [echelom.core :as ec :include-macros true]))
+      [plomb.core :as plomb :include-macros true]))
 
 ;defcomp uses a map form to define om components
 
-(ec/defcomp talker
+(plomb/defcomp talker
   [data owner opts]
   {:render-state
    (fn [_ state]
@@ -17,9 +17,9 @@
              ; emit! sends a map payload to components
              ; that handle the given keyword
 
-             #(ec/emit! owner :talk {:m message})} message)))})
+             #(plomb/emit! owner :talk {:m message})} message)))})
 
-(ec/defcomp hearer
+(plomb/defcomp hearer
   [data owner opts]
   {:render-state
     (fn [_ state]
@@ -32,7 +32,7 @@
            :erase
            (fn [e] (om/transact! data [:val] #(identity "")))}})
 
-(ec/defcomp app1
+(plomb/defcomp app1
   [data owner opts]
   {:init-state
     (fn [_] {:count 0})
@@ -43,11 +43,11 @@
          (dom/div #js {:className "container"}
            (dom/span nil (:count state))
            (dom/button
-            #js {:onClick #(ec/emit! owner :erase {})} "clear"))
+            #js {:onClick #(plomb/emit! owner :erase {})} "clear"))
          (dom/div #js {:className "container"}
-           (ec/make talker (:foo data) {})
-           (ec/make talker (:fiz data) {}))
-         (ec/make hearer (:bar data) {})))
+           (plomb/make talker (:foo data) {})
+           (plomb/make talker (:fiz data) {}))
+         (plomb/make hearer (:bar data) {})))
 
    ;under the hood, the component subscribes to a publisher for the event keyword chan
    ;subscriptions are removed when the component unmounts
@@ -74,7 +74,7 @@
 
 
 
-(ec/defcomp leaf
+(plomb/defcomp leaf
   [data owner opts]
   {:init-state
     (fn [_] {:s nil})
@@ -85,23 +85,23 @@
          (when (:u data)
            (dom/button #js {:onClick
                             (fn [e]
-                              (ec/emit! owner :clear {})
-                              (ec/up! owner :select {:c "orange"}))} "up!"))
+                              (plomb/emit! owner :clear {})
+                              (plomb/up! owner :select {:c "orange"}))} "up!"))
          (when (:d data)
            (dom/button #js {:onClick
                             (fn [e]
-                              (ec/emit! owner :clear {})
-                              (ec/down! owner :select {:c "lightBlue"}))} "down!"))
+                              (plomb/emit! owner :clear {})
+                              (plomb/down! owner :select {:c "lightBlue"}))} "down!"))
 
          (when (:ch data)
            (apply dom/span nil
-             (ec/make-all leaf (:ch data) {})))))
+             (plomb/make-all leaf (:ch data) {})))))
    :catch {:clear
            (fn [e] (om/set-state! owner :s false))
            :select
            (fn [e] (om/set-state! owner :s (:c e)))}})
 
-(ec/defcomp app2
+(plomb/defcomp app2
   [data owner opts]
   {:init-state
      (fn [_] {:count 0})
@@ -109,7 +109,7 @@
      (fn [_ state]
        (dom/div #js {:className "example"}
                 (dom/h3 nil (:title data))
-                (ec/make leaf (:tree data) {})))})
+                (plomb/make leaf (:tree data) {})))})
 
 (def ex2 (atom {:title "up! and down! the component heirarchy"
                 :tree {:d 1

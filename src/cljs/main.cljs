@@ -1,6 +1,6 @@
-(ns echelom.core
+(ns plomb.core
   (:require-macros [cljs.core.async.macros :refer [go alt!]]
-                   [echelom.core :refer [defcomp make make-all BROADCAST-CHANS]])
+                   [plomb.core :refer [defcomp make make-all]])
   (:require
       [om.core :as om :include-macros true]
       [om.dom :as dom :include-macros true]
