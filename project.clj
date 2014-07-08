@@ -15,14 +15,13 @@
 
 
   :cljsbuild {:builds
-              [{:source-paths ["src"]
-                :id "release"
+              [{:id "release"
+                :source-paths ["src"]
                 :compiler
                 {:output-to "core.js"
                  :output-dir "out"
-                 :optimizations :advanced
-                 :output-wrapper false
-                 :pretty-print false}}
+                 :optimizations :none
+                 :output-wrapper false}}
                {:id "simple"
                 :source-paths ["src" "examples/simple/src"]
                 :compiler {
