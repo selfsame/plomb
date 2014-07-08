@@ -1,0 +1,10 @@
+out
+/out
+/checkouts
+pom.xml
+*jar
+/target/
+/tests/
+.lein-deps-sum
+*.js
+
