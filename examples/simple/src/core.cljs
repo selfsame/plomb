@@ -123,3 +123,4 @@
                             {:d 1 :ch [{:ch [{:u 1}]}]}]}}))
 
 (om/root app2 ex2 {:target (.getElementById js/document "ex2")})
+
