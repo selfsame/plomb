@@ -1,6 +1,6 @@
-(defproject plomb "0.1.0-SNAPSHOT"
+(defproject org.clojars.selfsame/plomb "0.1.0-SNAPSHOT"
   :description "sugar macros for core.async chans between om components"
-  :url "https://github.com/selfsame/plomb/"
+  :url "https://github.com/selfsame/plomb"
   :license {:name "The MIT License (MIT)"
             :url "https://github.com/selfsame/plomb/blob/master/LICENSE"}
 
